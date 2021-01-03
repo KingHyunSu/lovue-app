@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "482883372963",
+    "project_id": "love-you-54ea2",
+    "storage_bucket": "love-you-54ea2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482883372963:android:d3fe83121defd2e32dfc16",
+        "android_client_info": {
+          "package_name": "com.loveyou"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482883372963-qr980f81d2fu8mve2m6dq7dr8rdmsib4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.loveyou",
+            "certificate_hash": "407da67b706a47251110fd2bb253f00afd894051"
+          }
+        },
+        {
+          "client_id": "482883372963-sbd3m5msl51f5vo2pilep87had8vsq2q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_1Zj-KOFwqIsOgu_35pg0KvoMTsDBc7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482883372963-sbd3m5msl51f5vo2pilep87had8vsq2q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

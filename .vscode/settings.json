@@ -1,0 +1,9 @@
+{
+  "eslint.validate": ["vue", "html", "javascript"],
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "npm-scripts.showStartNotification": false
+}
