@@ -1,9 +1,9 @@
 import * as React from 'react'
-import Container from '../components/calendar/Container'
+import Schedule from '../components/schedule'
 
 const CalendarScreen = () => {
 
-  return <Container></Container>
+  return <Schedule></Schedule>
 
 }
 

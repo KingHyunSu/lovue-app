@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {View, Text, FlatList, Dimensions,TouchableOpacity, StyleSheet} from 'react-native'
 
-import LeftArrowSVG from '../svg/arrow/leftArrowSVG'
-import RightArrowSVG from '../svg/arrow/rightArrowSVG'
+import LeftArrowSVG from '../../svg/arrow/leftArrowSVG'
+import RightArrowSVG from '../../svg/arrow/rightArrowSVG'
 
 function DayItem ({dayInfo, todayObj}) {
   return (
@@ -38,13 +38,16 @@ const Calendar = ({todayObj, year, month, holidayList, onChangeMonth}) => {
     // m => mm
     const monthFmt = month < 10 ? `0${month}` : `${month}`
     
+    // 해당 월의 마지막 일
     const maxDays = new Date(year, month, 0).getDate()
+    // 해당 월의 첫 요일
     const firstDayOfWeek = new Date(year, month - 1, 1).getDay()
     
     let dayOfWeek = firstDayOfWeek - 1
   
     
     const currentMonthDaysList = []
+    // 해당 월의 일수 
     for(let i = 0; i < maxDays; i++) {
       if(dayOfWeek > 6) {
         dayOfWeek = 0
@@ -63,6 +66,7 @@ const Calendar = ({todayObj, year, month, holidayList, onChangeMonth}) => {
 
     // 요일 위치 맞추기
     if(firstDayOfWeek > 0) {
+      // 전 달의 마지막 일
       const lastMonthMaxDays = new Date(year, month - 1, 0).getDate() - firstDayOfWeek + 1
       const lastMonthEdgeDaysList = []
       const prevMonthFmt =  month - 1 < 10 ? `0${month - 1}` : `${month - 1}`
@@ -126,6 +130,7 @@ const Calendar = ({todayObj, year, month, holidayList, onChangeMonth}) => {
         <TouchableOpacity style={[calendarNaviStyle.naviBtn, {alignItems:'flex-end'}]} 
           onPress={() => clickNext()}>
           <RightArrowSVG color={'#39c5bb'}/>
+          {/* <RightArrowSVG color={'#2ac1bc'}/> */}
         </TouchableOpacity>
       </View>
 
@@ -168,7 +173,7 @@ const calendarNaviStyle = StyleSheet.create({
     alignItems: 'flex-start'
   },
   dateTextBox: {
-    flexDirection: 'row'
+    flexDirection: 'row' 
   },
   dateText: {
     marginHorizontal: 4,

@@ -5,13 +5,19 @@ import {createStackNavigator} from '@react-navigation/stack'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {View, Text} from 'react-native'
 
-import calendarConfig from './src/components/calendar/config/calendarConfig'
+import calendarConfig from './src/components/schedule/calendar/config/calendarConfig'
 
-import TimeLineScreen from './src/screen/timeLineScreen'
+import TimeLine from './src/screen/TimeLine'
+import TimeLine2 from './src/screen/TimeLine2'
+import TimeLineDetail from './src/screen/TimeLineDetail'
 import homeScreen from './src/screen/homeScreen'
 import homeScreen2 from './src/screen/HomeScreen2'
+import Home from './src/screen/Home'
 import CreateTimeLineScreen from './src/screen/CreateTimeLineScreen'
 import CalendarScreen from './src/screen/CalendarScreen'
+
+// test
+import Test from './src/screen/Test'
 
 import { PermissionsAndroid, Platform } from 'react-native'
 
@@ -21,6 +27,11 @@ import GalleryModal from './src/modal/GalleryModal'
 // fcm
 import { Alert } from 'react-native'
 import messaging from '@react-native-firebase/messaging'
+
+// icon
+import HomeSVG from './src/components/svg/homeSVG'
+import CalendarSVG from './src/components/svg/calendarSVG'
+import AddSVG from './src/components/svg/plusCircleSVG'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -39,22 +50,51 @@ async function hasAndroidPermission() {
   return status === 'granted'
 }
 
-const Home = () => {
+const HomeIcon = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
+    <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
+      <HomeSVG/>
     </View>
   )
 }
 
 const MainNavi = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="home" component={TimeLineScreen} />
-      <Tab.Screen name="home2" component={homeScreen} />
-      <Tab.Screen name="plus" component={CreateTimeLineScreen} />
-      <Tab.Screen name="타임라인" component={homeScreen2} />
-      <Tab.Screen name="일정" component={CalendarScreen} />
+    <Tab.Navigator tabBarOptions={{showLabel:false}}>
+      <Tab.Screen name="TimeLine" component={TimeLine} />
+      <Tab.Screen name="home2" component={Home} />
+      <Tab.Screen
+        name="plus"
+        component={CreateTimeLineScreen} 
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <AddSVG />
+          )
+        }} />
+      <Tab.Screen 
+        name="타임라인"
+        component={homeScreen2}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <HomeSVG />
+          )
+        }}/>
+      <Tab.Screen 
+        name="test"
+        component={TimeLine2}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <HomeSVG />
+          )
+        }}/>
+      <Tab.Screen 
+        name="일정"
+        component={CalendarScreen}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <CalendarSVG />
+          )
+        }} />
     </Tab.Navigator>
   )
 }
@@ -75,6 +115,7 @@ export default function App() {
         <Stack.Screen name="main" component={MainNavi} />
         <Stack.Screen name="gallery" component={GalleryModal}/>
         <Stack.Screen name="main2" component={Home} />
+        <Stack.Screen name="TimeLineDetail" component={TimeLineDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   )

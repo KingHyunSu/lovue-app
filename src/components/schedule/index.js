@@ -11,13 +11,8 @@ import {ScrollView,
 import {timeStampFilter} from '../../utils/common'
 import axios from 'axios'
 
-import Calendar from './Calendar'
-import Schedule from './Schedule'
-import ScheduleItem from './ScheduleItem'
-
-// icon
-import PlusSVG from '../svg/plusSVG'
-import BottomArrowSVG from '../svg/arrow/bottomArrowSVG'
+import Calendar from './calendar'
+import ScheduleList from './ScheduleList'
 
 const DATA = [
   {
@@ -41,7 +36,7 @@ const HEADER_MAX_HEIGHT = 370
 const HEADER_MIN_HEIGHT = 50
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
 
-class CalendarViewer extends React.Component {
+class Schedule extends React.Component {
   constructor(props) {
     super(props)
     this.handleChangeMonth  = this.handleChangeMonth.bind(this)
@@ -184,58 +179,6 @@ class CalendarViewer extends React.Component {
     }
   }
 
-  schedule() {
-    const data = [
-      {
-        title: '일정명 테스트 1 일정명 테스트 1 일정명 테스트 1',
-        color: '#0297d9',
-        time: null
-      },
-      {
-        title: '일정명 테스트 2',
-        color: '#FF8DA4',
-        time: null
-      }
-    ]
-
-    const spin = this.state.spinValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['0deg', '45deg'] 
-    })
-
-    return (
-      <View style={schduleStyle.container}>
-        {/* schedule header */}
-        <View style={schduleStyle.header}>
-          <Text style={schduleStyle.headerText}>일정</Text>
-          <TouchableOpacity onPress={this.onSpin} style={{width:40, height:40, borderRadius: 50, backgroundColor:'#39c5bb', justifyContent:'center', alignItems:'center'}}>
-            <Animated.View style={{transform: [{rotate: spin}]}}>
-              <PlusSVG/>
-            </Animated.View>
-          </TouchableOpacity>
-        </View>
-
-        {/* schedule item  */}
-        {/* <ScheduleItem></ScheduleItem> */}
-        {data.map((item, index) =>
-          <View key={index} style={[schduleStyle.item, {backgroundColor: this.hexToRgbA(item.color)}]}>
-            <Image
-              style={schduleStyle.avator}
-              resizeMode={'cover'}
-              source={require('./test.jpg')}></Image> 
-            <View style={{flex:1}}>
-              <View style={{alignItems:'flex-end',marginBottom:3}}>
-                <BottomArrowSVG color={item.color}/>
-              </View>
-              <Text style={[schduleStyle.scheduleText, schduleStyle.title]}>{item.title}</Text>
-              <Text style={schduleStyle.scheduleText}>{item.time ? item.time : '시간 없음'}</Text>
-            </View>
-          </View>
-        )}
-      </View>
-    )
-  }
-
   render() {
     const headerHeight = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
@@ -260,7 +203,8 @@ class CalendarViewer extends React.Component {
             {useNativeDriver: false}
           )}
         >
-          {this.schedule()}
+          {/* {this.schedule()} */}
+          <ScheduleList/>
         </ScrollView>
         <Animated.View
           style={{position:'absolute', top: 0, overflow:'hidden', height: headerHeight}}
@@ -276,62 +220,4 @@ class CalendarViewer extends React.Component {
     )
   }
 }
-
-const schduleStyle = StyleSheet.create({
-  container: {
-    marginTop: HEADER_MAX_HEIGHT,
-    paddingVertical: 20,
-    paddingHorizontal: 14,
-    borderTopWidth: 1,
-    borderTopColor: '#efefef',
-    backgroundColor: '#ffffff'
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10
-  },
-  headerText: {
-    fontSize: 17
-  },
-
-  item: {
-    flex: 1,
-    flexDirection: 'row',
-    // paddingVertical: 20,
-    // paddingHorizontal: 15,
-    padding: 18,
-    marginVertical: 10,
-    minHeight: 70,
-    borderRadius: 15,
-  },
-  avator: {
-    width:60,
-    height:60, 
-    borderRadius:30,
-    marginRight: 20, 
-    alignSelf: 'center'
-  },
-  itemBar: {
-    width: 2,
-    height: '100%',
-    borderRadius: 2,
-    marginLeft: 1,
-    marginRight: 20,
-    overflow: 'hidden'
-  },
-  scheduleText: {
-    color: '#586874',
-    marginBottom: 3
-  },
-  title: {
-    fontSize: 15,
-    fontWeight: 'bold'
-  },
-  timeText: {
-    color: '#586874'
-  }
-})
-
-export default CalendarViewer
+export default Schedule

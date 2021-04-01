@@ -2,13 +2,12 @@ import * as React from 'react'
 import { FlatList, View, Text, TouchableOpacity, Image } from 'react-native'
 import CameraRoll from '@react-native-community/cameraroll'
 
-
-const GalleryModal = () => {
+const GalleryModal = ({ navigation, route }) => {
   const [albumList, setAlbumList] = React.useState([])
   const [isShowImageUpload, changeShowImageUpload] = React.useState(false)
   const [photoList, setPhotoList] = React.useState([])
   const [activeImage, setActiveImage] = React.useState(null)
-
+  
   React.useEffect(() => {
     // const params = { assetType: 'All' }
     // console.log('CameraRoll.getAlbums(params)',CameraRoll.getAlbums())
@@ -38,9 +37,13 @@ const GalleryModal = () => {
   // 여기서 image change? 여기서 인덱스 값 바꾸고 useEffect로 change?
   const clickImage = (imageURI) => {
     setActiveImage(imageURI)
+    
+    route.params.onTakeImage(imageURI)
+    navigation.goBack()
   }
 
   const ImageItem = (prop) => {
+    // console.log(JSON.stringify(prop))
     return (
       <TouchableOpacity onPress={() => clickImage(prop.imageURI)} style={{width:'33%', height:120}}>
         <Image
@@ -48,7 +51,6 @@ const GalleryModal = () => {
           source={{ uri: prop.imageURI }}
         />
       </TouchableOpacity>
-      // <Text>{JSON.stringify(prop.imageURI)}</Text>
     )
   }
   // p.node.image.uri
